@@ -42,8 +42,32 @@ public class AddAssignmentTest {
         // arrange
         String id = "testId";
         String descriere = "testDescriere";
-        int deadline = 4;
-        int startline = 3;
+        int deadline = 1;
+        int startline = 1;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema != null;
+        assert tema.getDescriere().equals(descriere);
+        assert tema.getDeadline() == deadline;
+        assert tema.getStartline() == startline;
+    }
+
+    @Test
+    public void AddAssignment_ValidData2_AssignmentAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 14;
+        int startline = 14;
 
         // act
         service.saveTema(id, descriere, deadline, startline);

@@ -60,11 +60,53 @@ public class AddStudentTest {
     }
 
     @Test
+    public void SaveStudent_ValidData2_UserAddedToRepo() {
+        // arrange
+        String id = "5";
+        String name = "TestStudent";
+        int group = 937;
+
+        // act
+        service.saveStudent(id, name, group);
+
+        // assert
+        Student student = null;
+        for (Student stud : service.findAllStudents()) {
+            if (stud.getID().equals(id)) {
+                student = stud;
+            }
+        }
+        assert student != null;
+        assert student.getNume().equals(name);
+        assert student.getGrupa() == group;
+    }
+
+    @Test
     public void SaveStudent_InvalidGroup_UserNotAddedToRepo() {
         // arrange
         String id = "5";
         String name = "TestStudent";
-        int group = 109; // Invalid group
+        int group = 110; // Invalid group
+
+        // act
+        service.saveStudent(id, name, group);
+
+        // assert
+        Student student = null;
+        for (Student stud : service.findAllStudents()) {
+            if (stud.getID().equals(id)) {
+                student = stud;
+            }
+        }
+        assert student == null;
+    }
+
+    @Test
+    public void SaveStudent_InvalidGroup2_UserNotAddedToRepo() {
+        // arrange
+        String id = "5";
+        String name = "TestStudent";
+        int group = 938; // Invalid group
 
         // act
         service.saveStudent(id, name, group);
