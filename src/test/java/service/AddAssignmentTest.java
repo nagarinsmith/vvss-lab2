@@ -81,4 +81,29 @@ public class AddAssignmentTest {
         }
         assert tema == null;
     }
+
+    @Test
+    public void AddAssignment_AddTwice_AssignmentAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 4;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema != null;
+        assert tema.getDescriere().equals(descriere);
+        assert tema.getDeadline() == deadline;
+        assert tema.getStartline() == startline;
+    }
 }
