@@ -83,6 +83,174 @@ public class AddAssignmentTest {
     }
 
     @Test
+    public void AddAssignment_NullDescription_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = null;
+        int deadline = 4;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_EmptyId_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "";
+        String descriere = "testDescriere";
+        int deadline = 4;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_NullId_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = null;
+        String descriere = "testDescriere";
+        int deadline = 4;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_DeadlineWeek0_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 0;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_DeadlineWeek15_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 15;
+        int startline = 3;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_DeadlineEarlierThanStartline_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 3;
+        int startline = 4;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_StartlineWeek0_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 4;
+        int startline = 0;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
+    public void AddAssignment_StartlineWeek15_AssignmentNotAddedToRepo() {
+        // arrange
+        String id = "testId";
+        String descriere = "testDescriere";
+        int deadline = 4;
+        int startline = 15;
+
+        // act
+        service.saveTema(id, descriere, deadline, startline);
+
+        // assert
+        Tema tema = null;
+        for (Tema tema1 : service.findAllTeme()) {
+            if (tema1.getID().equals(id)) {
+                tema = tema1;
+            }
+        }
+        assert tema == null;
+    }
+
+    @Test
     public void AddAssignment_AddTwice_AssignmentAddedToRepo() {
         // arrange
         String id = "testId";
