@@ -1,8 +1,6 @@
 package service;
 
 import domain.Nota;
-import domain.Student;
-import domain.Tema;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class BigBangTest {
+public class AddGradeTest {
 
     private File studentFile = new File("testStudent.xml");
     private File assignmentFile = new File("testAssignment.xml");
@@ -71,52 +69,6 @@ public class BigBangTest {
     }
 
     @Test
-    public void AddAssignment_ValidData_AssignmentAddedToRepo() {
-        // arrange
-        String id = "testId";
-        String descriere = "testDescriere";
-        int deadline = 1;
-        int startline = 1;
-
-        // act
-        service.saveTema(id, descriere, deadline, startline);
-
-        // assert
-        Tema tema = null;
-        for (Tema tema1 : service.findAllTeme()) {
-            if (tema1.getID().equals(id)) {
-                tema = tema1;
-            }
-        }
-        assert tema != null;
-        assert tema.getDescriere().equals(descriere);
-        assert tema.getDeadline() == deadline;
-        assert tema.getStartline() == startline;
-    }
-
-    @Test
-    public void AddStudent_ValidData_UserAddedToRepo() {
-        // arrange
-        String id = "5";
-        String name = "TestStudent";
-        int group = 111;
-
-        // act
-        service.saveStudent(id, name, group);
-
-        // assert
-        Student student = null;
-        for (Student stud : service.findAllStudents()) {
-            if (stud.getID().equals(id)) {
-                student = stud;
-            }
-        }
-        assert student != null;
-        assert student.getNume().equals(name);
-        assert student.getGrupa() == group;
-    }
-
-    @Test
     public void AddGrade_ValidData_GradeAddedToRepo() {
         // arrange
         String idStudent = "5";
@@ -149,12 +101,5 @@ public class BigBangTest {
         assert nota.getNota() == notaVal;
         assert nota.getSaptamanaPredare() == predata;
         assert nota.getFeedback().equals(feedback);
-    }
-
-    @Test
-    public void AddObjects_ValidData_ObjectsAddedToRepo() {
-        AddAssignment_ValidData_AssignmentAddedToRepo();
-        AddStudent_ValidData_UserAddedToRepo();
-        AddGrade_ValidData_GradeAddedToRepo();
     }
 }
